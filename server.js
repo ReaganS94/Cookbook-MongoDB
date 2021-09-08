@@ -6,13 +6,14 @@ require("colors");
 const connectDB = require("./dbinit");
 const recipes = require("./api/recipes");
 const server = express();
-server.use(cors({ origin: "*" }));
+
 const PORT = process.env.PORT || 5000;
 
 connectDB();
 
 server.use(express.json());
-server.get("/", cors(), (req, res) => res.send("SHOW DATA HERE"));
+server.use(cors());
+server.get("/", (req, res) => res.send("SHOW DATA HERE"));
 server.use("/recipes", recipes);
 server.listen(PORT, () => console.log(`Server started at ${PORT}`));
 
